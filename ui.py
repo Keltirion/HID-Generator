@@ -1,16 +1,17 @@
-import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QLabel
+from PyQt5.QtWidgets import QWidget, QApplication, QLabel, QMainWindow
 
 
-class MainWindow(QWidget):
-    def __init__(self, parent=None, flags=Qt.WindowFlags()):
-        return super().__init__(parent=parent, flags=flags)
+class MainWindow(QMainWindow):
+    def __init__(self):
+        return super().__init__()
 
         self.setWindowTitle('Hid Generator')
-        
+        self.setGeometry(0, 0, 100, 100)  
+              
         self.QLabel = QLabel()
 
+        self.initui()
+
     def initui(self):
-        
-        
+                
         self.show()
