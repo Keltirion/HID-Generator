@@ -1,5 +1,4 @@
-import os
-import unidecode
+from functions import *
 from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QHBoxLayout, QVBoxLayout,
                             QFileDialog, QPushButton, QListWidget)
 
@@ -7,7 +6,9 @@ photoalbum = {}
 
 class MainWindow(QWidget):
     def __init__(self):
-        super().__init__()         
+        super().__init__()
+
+        self.card =  CardCreate()        
         
         self.addfiles = QFileDialog(self, )
         self.label = QLabel('Wybrane zdjęcia')
@@ -55,6 +56,7 @@ class MainWindow(QWidget):
 
         self.btn.clicked.connect(self.browse)
         self.delbtn.clicked.connect(self.deleteitem)
+        self.startbtn.clicked.connect(self.start)
 
         self.setLayout(self.vbox3)        
         self.show()
@@ -75,7 +77,10 @@ class MainWindow(QWidget):
         photoalbum.pop(selection)
 
     def start(self):
-        pass
+        for key, val in photoalbum.items():
+            print('Uzywam ' + str(key))
+            self.card.create(val)
+            cv2.waitKey(0)
 
     def close(self):
         pass
