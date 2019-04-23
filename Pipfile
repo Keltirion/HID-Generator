@@ -10,6 +10,7 @@ autopep8 = "*"
 pyqt5 = "*"
 numpy = "*"
 unidecode = "*"
+opencv-python = "*"
 
 [requires]
 python_version = "3.7"

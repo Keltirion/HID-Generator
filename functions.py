@@ -1,7 +1,7 @@
-import unidecode
 import numpy
-import os
+import cv2
+
 
 class CardCreate():
-    def __init__(self):
+    def __init__(self, photo):
         pass
