@@ -6,11 +6,9 @@ photoalbum = {}
 
 class MainWindow(QWidget):
     def __init__(self):
-        super().__init__()
-
-        self.card =  CardCreate()        
+        super().__init__()      
         
-        self.addfiles = QFileDialog(self, )
+        self.addfiles = QFileDialog(self,)
         self.label = QLabel('Wybrane zdjęcia')
         self.list = QListWidget()
         self.btn = QPushButton('Browse files')
@@ -68,8 +66,7 @@ class MainWindow(QWidget):
             folder, file = os.path.split(path)
             file = (unidecode.unidecode(file)).replace('_', ' ')            
             photoalbum[file] = path 
-            self.list.addItem(file)
-    
+            self.list.addItem(file)    
 
     def deleteitem(self):        
         selection = self.list.currentItem().text()
@@ -77,11 +74,9 @@ class MainWindow(QWidget):
         photoalbum.pop(selection)
 
     def start(self):
-        for key, val in photoalbum.items():
-            print('Uzywam ' + str(key))
-            self.card.create(val)
-            cv2.waitKey(0)
-
+        for key, val in photoalbum.items():            
+            CardCreate.create(val)
+            
     def close(self):
         pass
         
