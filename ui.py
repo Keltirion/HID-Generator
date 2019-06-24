@@ -75,8 +75,8 @@ class MainWindow(QWidget):
 
     def start(self):
         for key, val in photoalbum.items():            
-            CardCreate.create(val)
-            
+            CardCreate().create()
+
     def close(self):
         pass
         

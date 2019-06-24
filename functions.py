@@ -5,12 +5,14 @@ import cv2
 
 cascade = cv2.CascadeClassifier('./Files/haarcascade_frontalface_alt.xml')
 
-class CardCreate():
+
+class CardCreate:
     def __init__(self, photo):
         self.photo = photo
-    
+
     @classmethod
-    def create(self, photo):
+    def create(self):      
+
         logopath = './Files/DOVISTA - User.jpg'        
         read = cv2.imread(self.photo, cv2.IMREAD_COLOR)
         logo = cv2.imread(logopath, cv2.IMREAD_COLOR)
