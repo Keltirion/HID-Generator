@@ -8,6 +8,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()      
         
+        self.card = CardCreate()
         self.addfiles = QFileDialog(self,)
         self.label = QLabel('Wybrane zdjęcia')
         self.list = QListWidget()
@@ -19,8 +20,7 @@ class MainWindow(QWidget):
         self.vbox2 = QVBoxLayout()
         self.vbox3 = QVBoxLayout()
         self.hbox = QHBoxLayout()        
-        self.hbox1 = QHBoxLayout()
-        
+        self.hbox1 = QHBoxLayout()              
 
         self.initui()
 
@@ -74,8 +74,15 @@ class MainWindow(QWidget):
         photoalbum.pop(selection)
 
     def start(self):
-        for key, val in photoalbum.items():            
-            CardCreate().create()
+        for key, val in photoalbum.items(): 
+            path, file = os.path.split(val)
+            file_nodiacs = unidecode.unidecode(file)
+            photo = os.path.join(path, file_nodiacs)      
+            os.rename(val, photo)
+            self.card.create(photo)
+            os.rename(photo, val)       
+         
+           
 
     def close(self):
         pass
