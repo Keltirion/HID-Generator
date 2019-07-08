@@ -12,6 +12,7 @@ pyqt5 = "*"
 numpy = "*"
 unidecode = "*"
 opencv-python = "*"
+pillow = "*"
 
 [requires]
 python_version = "3.7"

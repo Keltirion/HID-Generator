@@ -1,6 +1,6 @@
 from functions import *
 from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QHBoxLayout, QVBoxLayout,
-                            QFileDialog, QPushButton, QListWidget)
+                            QFileDialog, QPushButton, QListWidget,)
 
 photoalbum = {}
 
@@ -9,6 +9,7 @@ class MainWindow(QWidget):
         super().__init__()      
         
         self.card = CardCreate()
+        self.windowTitle('Samurai')
         self.addfiles = QFileDialog(self,)
         self.label = QLabel('Wybrane zdjęcia')
         self.list = QListWidget()
@@ -73,15 +74,21 @@ class MainWindow(QWidget):
         self.list.takeItem(self.list.row(self.list.currentItem()))
         photoalbum.pop(selection)
 
-    def start(self):
+    def start(self):        
+
         for key, val in photoalbum.items(): 
+
             path, file = os.path.split(val)
             file_nodiacs = unidecode.unidecode(file)
             photo = os.path.join(path, file_nodiacs)      
             os.rename(val, photo)
             self.card.create(photo)
-            os.rename(photo, val)       
-         
+           
+            card_RGB = cv2.cvtColor(self.card.face, cv2.COLOR_BGR2RGB)
+            card = Image.fromarray(card_RGB)            
+            card.save('Cards/ {}'.format(file), 'JPEG')            
+
+            os.rename(photo, val)
            
 
     def close(self):
