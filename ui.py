@@ -8,8 +8,7 @@ class MainWindow(QWidget):
     def __init__(self):
         super().__init__()      
         
-        self.card = CardCreate()
-        self.windowTitle('Samurai')
+        self.card = CardCreate()        
         self.addfiles = QFileDialog(self,)
         self.label = QLabel('Wybrane zdjęcia')
         self.list = QListWidget()
@@ -76,20 +75,27 @@ class MainWindow(QWidget):
 
     def start(self):        
 
-        for key, val in photoalbum.items(): 
-
+        for key, val in photoalbum.items():
             path, file = os.path.split(val)
             file_nodiacs = unidecode.unidecode(file)
-            photo = os.path.join(path, file_nodiacs)      
+            photo = os.path.join(path, file_nodiacs)     
+            
             os.rename(val, photo)
-            self.card.create(photo)
-           
-            card_RGB = cv2.cvtColor(self.card.face, cv2.COLOR_BGR2RGB)
-            card = Image.fromarray(card_RGB)            
-            card.save('Cards/ {}'.format(file), 'JPEG')            
+            image = cv2.imread(photo, cv2.IMREAD_COLOR)
+            (h, w) = image.shape[0:2]           
+            if h >= 1080 or w >= 1920:
+                self.card.resize(photo, width=800)
+                cv2.imshow('TEST', self.card.resized_photo)
+                cv2.waitKey(0)
+                self.card.create(self.card.resized_photo)
+            else:
+                self.card.create(photo)
+            if self.card.face is not None:                
+                self.card.face.save('Cards/ {}'.format(file), 'JPEG')
+            else:
+                print('Potwierdzam dla ' + str(photo))
 
-            os.rename(photo, val)
-           
+            os.rename(photo, val)           
 
     def close(self):
         pass
