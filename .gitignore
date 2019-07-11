@@ -125,7 +125,13 @@ dmypy.json
 # VScode
 .vscode
 
+<<<<<<< HEAD
 # Folders
 /Photos
 /Cards
 /__pycache__
+=======
+# Other
+Files
+Photos
+>>>>>>> da83cc65f3fbfdba82cab2044234ef6914e99266

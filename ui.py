@@ -3,6 +3,7 @@ from PyQt5.QtWidgets import (QWidget, QApplication, QLabel, QHBoxLayout, QVBoxLa
 
 photoalbum = {}
 
+photoalbum = {}
 
 class MainWindow(QWidget):
     def __init__(self):
